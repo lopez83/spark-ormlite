@@ -1,4 +1,4 @@
-package com.lopez83.spark.utils;
+package com.accesso.challengeladder.utils;
 
 import java.util.HashMap;
 

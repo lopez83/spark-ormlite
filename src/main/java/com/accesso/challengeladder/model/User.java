@@ -1,4 +1,4 @@
-package com.lopez83.spark.model;
+package com.accesso.challengeladder.model;
 
 import java.util.Date;
 

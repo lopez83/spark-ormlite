@@ -1,12 +1,12 @@
-package com.lopez83.spark;
+package com.accesso.challengeladder;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import com.lopez83.spark.controller.UserController;
-import com.lopez83.spark.utils.CorsFilters;
+import com.accesso.challengeladder.controller.UserController;
+import com.accesso.challengeladder.utils.CorsFilters;
 
 public class Main {
 

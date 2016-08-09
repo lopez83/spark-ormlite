@@ -1,4 +1,4 @@
-package com.lopez83.spark.controller;
+package com.accesso.challengeladder.controller;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -9,9 +9,9 @@ import java.util.List;
 
 import org.eclipse.jetty.http.HttpStatus;
 
-import com.lopez83.spark.model.User;
-import com.lopez83.spark.services.UserService;
-import com.lopez83.spark.utils.JsonUtil;
+import com.accesso.challengeladder.model.User;
+import com.accesso.challengeladder.services.UserService;
+import com.accesso.challengeladder.utils.JsonUtil;
 
 public class UserController {
 	public UserController() throws SQLException, IOException {
