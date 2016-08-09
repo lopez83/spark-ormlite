@@ -41,4 +41,23 @@ public class RankingService
 
 		return rankList;
 	}
+
+    public Ranking createRanking(String userId) throws SQLException
+    {
+        Ranking r = new Ranking();
+        try
+        {
+            r.setUser(new User(Integer.parseInt(userId)));
+
+            // creates a new user in the DB
+            rankingDao.create(r);
+        }
+        catch (Exception e)
+        {
+            logger.error("Exception..." + e.getMessage());
+            return null;
+        }
+
+        return r;
+    }
 }

@@ -1,6 +1,7 @@
 package com.accesso.challengeladder.controller;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,5 +22,8 @@ public class RankingController
 			return JsonUtil.toJson(rankings);
 		});
 
+        post("/ranking", (req, res) -> rankingService.createRanking(
+                    req.queryParams("userId")),
+            JsonUtil.json());
 	}
 }

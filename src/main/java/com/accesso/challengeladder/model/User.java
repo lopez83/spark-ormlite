@@ -33,6 +33,11 @@ public class User
 		// ORMLite needs a no-arg constructor
 	}
 
+    public User(int id)
+    {
+        this.id = id;
+    }
+
 	public int getId()
 	{
 		return this.id;
