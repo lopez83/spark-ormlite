@@ -16,10 +16,10 @@ public class RankingHistory
 	private int ranking;
 
 	@DatabaseField(columnName = "user_id")
-	private int userId;
+	private User user;
 
 	@DatabaseField(columnName = "match_id")
-	private int matchId;
+	private Match match;
 
 	@DatabaseField(columnName = "updated_at")
 	private Date updatedAt;
@@ -39,16 +39,6 @@ public class RankingHistory
 		return ranking;
 	}
 
-	public int getUserId()
-	{
-		return userId;
-	}
-
-	public int getMatchId()
-	{
-		return matchId;
-	}
-
 	public Date getUpdatedAt()
 	{
 		return updatedAt;
@@ -59,14 +49,24 @@ public class RankingHistory
 		this.ranking = ranking;
 	}
 
-	public void setUserId(int userId)
+	public User getUser()
 	{
-		this.userId = userId;
+		return user;
 	}
 
-	public void setMatchId(int matchId)
+	public Match getMatch()
 	{
-		this.matchId = matchId;
+		return match;
+	}
+
+	public void setUser(User user)
+	{
+		this.user = user;
+	}
+
+	public void setMatch(Match match)
+	{
+		this.match = match;
 	}
 
 	public void setUpdatedAt(Date updatedAt)

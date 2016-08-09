@@ -11,10 +11,10 @@ public class MatchUser
 	private int id;
 
 	@DatabaseField(columnName = "match_id")
-	private int matchId;
+	private Match match;
 
 	@DatabaseField(columnName = "user_id")
-	private int userId;
+	private User user;
 
 	@DatabaseField
 	private int score;
@@ -29,14 +29,14 @@ public class MatchUser
 		return this.id;
 	}
 
-	public int getMatchId()
+	public User getUser()
 	{
-		return matchId;
+		return user;
 	}
 
-	public int getUserId()
+	public void setUser(User user)
 	{
-		return userId;
+		this.user = user;
 	}
 
 	public int getScore()
@@ -44,14 +44,14 @@ public class MatchUser
 		return score;
 	}
 
-	public void setMatchId(int matchId)
+	public Match getMatch()
 	{
-		this.matchId = matchId;
+		return match;
 	}
 
-	public void setUserId(int userId)
+	public void setMatch(Match match)
 	{
-		this.userId = userId;
+		this.match = match;
 	}
 
 	public void setScore(int score)

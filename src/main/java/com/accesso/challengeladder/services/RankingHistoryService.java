@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.accesso.challengeladder.model.Match;
 import com.accesso.challengeladder.model.RankingHistory;
+import com.accesso.challengeladder.model.User;
 import com.accesso.challengeladder.utils.DBHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -19,6 +21,8 @@ public class RankingHistoryService
 
 	private ConnectionSource connectionSource;
 	private Dao<RankingHistory, String> rankingHistoryDao;
+	private Dao<User, String> userDao;
+	private Dao<Match, String> matchDao;
 
 	public RankingHistoryService() throws SQLException, IOException
 	{
@@ -28,6 +32,8 @@ public class RankingHistoryService
 
 		this.connectionSource = connectionSource;
 		rankingHistoryDao = DaoManager.createDao(this.connectionSource, RankingHistory.class);
+		userDao = DaoManager.createDao(this.connectionSource, User.class);
+		matchDao = DaoManager.createDao(this.connectionSource, Match.class);
 	}
 
 	public RankingHistory createRankingHistory(int ranking, int userId, int matchId)
@@ -36,9 +42,11 @@ public class RankingHistoryService
 
 		try
 		{
-			rankingHistory.setMatchId(matchId);
+			Match match = matchDao.queryForId(String.valueOf(matchId));
+			rankingHistory.setMatch(match);
+			User user = userDao.queryForId(String.valueOf(userId));
+			rankingHistory.setUser(user);
 			rankingHistory.setRanking(ranking);
-			rankingHistory.setUserId(userId);
 			// creates a new rankingHistory in the DB
 			rankingHistoryDao.create(rankingHistory);
 		}

@@ -13,7 +13,7 @@ public class Match
 	private int id;
 
 	@DatabaseField(columnName = "user_id")
-	private int userId;
+	private User user;
 
 	@DatabaseField(columnName = "match_timestamp")
 	private Date matchTimestamp;
@@ -22,13 +22,13 @@ public class Match
 	private Date creationTimestamp;
 
 	@DatabaseField(columnName = "victor_user_id")
-	private int victorUserId;
+	private User victorUser;
 
 	@DatabaseField(columnName = "status_id")
-	private int statusId;
+	private MatchStatus matchStatus;
 
 	@DatabaseField(columnName = "creator_user_id")
-	private int creatorUserId;
+	private User creatorUser;
 
 	public Match()
 	{
@@ -38,11 +38,6 @@ public class Match
 	public int getId()
 	{
 		return this.id;
-	}
-
-	public int getUserId()
-	{
-		return userId;
 	}
 
 	public Date getMatchTimestamp()
@@ -55,26 +50,6 @@ public class Match
 		return creationTimestamp;
 	}
 
-	public int getVictorUserId()
-	{
-		return victorUserId;
-	}
-
-	public int getStatusId()
-	{
-		return statusId;
-	}
-
-	public int getCreatorUserId()
-	{
-		return creatorUserId;
-	}
-
-	public void setUserId(int userId)
-	{
-		this.userId = userId;
-	}
-
 	public void setMatchTimestamp(Date matchTimestamp)
 	{
 		this.matchTimestamp = matchTimestamp;
@@ -85,19 +60,44 @@ public class Match
 		this.creationTimestamp = creationTimestamp;
 	}
 
-	public void setVictorUserId(int victorUserId)
+	public User getUser()
 	{
-		this.victorUserId = victorUserId;
+		return user;
 	}
 
-	public void setStatusId(int statusId)
+	public User getVictorUser()
 	{
-		this.statusId = statusId;
+		return victorUser;
 	}
 
-	public void setCreatorUserId(int creatorUserId)
+	public MatchStatus getMatchStatus()
 	{
-		this.creatorUserId = creatorUserId;
+		return matchStatus;
+	}
+
+	public User getCreatorUser()
+	{
+		return creatorUser;
+	}
+
+	public void setUser(User user)
+	{
+		this.user = user;
+	}
+
+	public void setVictorUser(User victorUser)
+	{
+		this.victorUser = victorUser;
+	}
+
+	public void setMatchStatus(MatchStatus matchStatus)
+	{
+		this.matchStatus = matchStatus;
+	}
+
+	public void setCreatorUser(User creatorUser)
+	{
+		this.creatorUser = creatorUser;
 	}
 
 }
