@@ -3,6 +3,8 @@ package com.lopez83.spark.controller;
 import static spark.Spark.get;
 import static spark.Spark.post;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.eclipse.jetty.http.HttpStatus;
@@ -12,7 +14,9 @@ import com.lopez83.spark.services.UserService;
 import com.lopez83.spark.utils.JsonUtil;
 
 public class UserController {
-	public UserController(final UserService userService) {
+	public UserController() throws SQLException, IOException {
+
+		UserService userService = new UserService();
 
 		// Routes, logic defined in the service
 		get("/users", (req, res) -> {
