@@ -30,6 +30,42 @@ public class UserService
 		userDao = DaoManager.createDao(this.connectionSource, User.class);
 	}
 
+	public boolean addUser(User newUser)
+	{
+		try
+		{
+            newUser.setPassword("pingpong");
+            newUser.setSalt("asdf");
+            userDao.create(newUser);
+            return true;
+		}
+		catch (Exception e)
+		{
+			logger.error("Exception..." + e.getMessage());
+			return false;
+		}
+	}
+
+	public boolean updateUser(User updatedUser)
+	{
+		try
+		{
+            Integer currentUserId = updatedUser.getId();
+            User currentUser = getUser(currentUserId.toString());
+            currentUser.setName(updatedUser.getName());
+            currentUser.setEmail(updatedUser.getEmail());
+            currentUser.setAdminFlag(updatedUser.getAdminFlag());
+            currentUser.setActiveFlag(updatedUser.getActiveFlag());
+            userDao.update(currentUser);
+            return true;
+		}
+		catch (Exception e)
+		{
+			logger.error("Exception..." + e.getMessage());
+			return false;
+		}
+	}
+
 	public User createUser(String username, String email)
 	{
 		User user = new User();
@@ -48,22 +84,35 @@ public class UserService
 		return user;
 	}
 
-	public User getUser(String id) throws SQLException
+	public User getUser(String userId) throws SQLException
 	{
-		User user = userDao.queryForId(id);
-		if (user != null)
-		{
-			return user;
-		}
-		else
-		{
-			return null;
-		}
-	}
+        User user = null;
+        if (userId != null) {
+            user = userDao.queryForId(userId);
+        }
+        return user;
+    }
+
+	public User getMaskedUser(String userId) throws SQLException
+	{
+        User user = getUser(userId);
+        if (userId != null) {
+            user.setPassword(null);
+            user.setSalt(null);
+        }
+        return user;
+    }
 
 	public List<User> getAllUsers() throws SQLException
 	{
 		List<User> userList = userDao.queryForAll();
+        for(User user: userList) {
+            user.setPassword(null);
+            user.setSalt(null);
+            user.setActiveFlag(null);
+            user.setAdminFlag(null);
+            user.setEmail(null);
+        }
 		return userList;
 	}
 }
