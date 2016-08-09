@@ -1,21 +1,26 @@
 package com.accesso.challengeladder.utils;
 
-import com.google.gson.Gson;
-
 import spark.ResponseTransformer;
 
-public class JsonUtil {
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
-	public static String toJson(Object object) {
+public class JsonUtil
+{
 
+	public static String toJson(Object object)
+	{
 		return new Gson().toJson(object);
-
 	}
 
-	public static ResponseTransformer json() {
-
+	public static ResponseTransformer json()
+	{
 		return JsonUtil::toJson;
 
 	}
 
+	public static <T> T fromJson(JsonElement json, Class<T> classIn)
+	{
+		return new Gson().fromJson(json, classIn);
+	}
 }
