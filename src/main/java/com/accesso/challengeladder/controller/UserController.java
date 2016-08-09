@@ -5,6 +5,7 @@ import static spark.Spark.post;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jetty.http.HttpStatus;
@@ -21,12 +22,25 @@ public class UserController {
 		// Routes, logic defined in the service
 		get("/users", (req, res) -> {
 			List<User> users = userService.getAllUsers();
+            for(User user: users) {
+                user.setPassword(null);
+                user.setSalt(null);
+                user.setActiveFlag(null);
+                user.setAdminFlag(null);
+                user.setEmail(null);
+            }
 			return JsonUtil.toJson(users);
 		});
 
 		get("/users/:id", (req, res) -> {
-			User user = userService.getUser(req.params(":id"));
-			if (user != null) {
+            String userId = req.params(":id");
+            User user = null;
+            if (userId != null) {
+			    user = userService.getUser(userId);
+            }
+            if (user != null) {
+                user.setPassword(null);
+                user.setSalt(null);
 				return JsonUtil.toJson(user);
 			}
 

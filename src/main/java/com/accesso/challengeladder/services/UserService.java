@@ -34,9 +34,7 @@ public class UserService {
 		User user = new User();
 		try {
 
-			user.setUsername(username);
 			user.setEmail(email);
-			user.setCreatedAt(new Date());
 			// creates a new user in the DB
 			userDao.create(user);
 		} catch (Exception e) {
