@@ -12,8 +12,8 @@ public class Ranking
 	@DatabaseField(columnName = "rank_id", generatedId = true)
 	private int id;
 
-	@DatabaseField(columnName = "user_id")
-	private int userId;
+	@DatabaseField(columnName = "user_id", foreign = true)
+	private User user;
 
 	@DatabaseField
 	private Date timestamp;
@@ -28,15 +28,15 @@ public class Ranking
 		return this.id;
 	}
 
-	public int getUserId()
-	{
-		return userId;
-	}
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
 
-	public void setUserId(int userId)
-	{
-		this.userId = userId;
-	}
+    public User getUser()
+    {
+        return user;
+    }
 
 	public Date getTimestamp()
 	{
