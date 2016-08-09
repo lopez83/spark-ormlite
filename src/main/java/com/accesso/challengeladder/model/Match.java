@@ -12,7 +12,7 @@ public class Match
 	@DatabaseField(generatedId = true)
 	private int id;
 
-	@DatabaseField(columnName = "user_id")
+	@DatabaseField(columnName = "user_id", foreign = true)
 	private User user;
 
 	@DatabaseField(columnName = "match_timestamp")
@@ -21,13 +21,13 @@ public class Match
 	@DatabaseField(columnName = "creation_timestamp")
 	private Date creationTimestamp;
 
-	@DatabaseField(columnName = "victor_user_id")
+	@DatabaseField(columnName = "victor_user_id", foreign = true)
 	private User victorUser;
 
-	@DatabaseField(columnName = "status_id")
+	@DatabaseField(columnName = "status_id", foreign = true)
 	private MatchStatus matchStatus;
 
-	@DatabaseField(columnName = "creator_user_id")
+	@DatabaseField(columnName = "creator_user_id", foreign = true)
 	private User creatorUser;
 
 	public Match()

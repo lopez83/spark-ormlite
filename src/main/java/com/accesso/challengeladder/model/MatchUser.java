@@ -10,10 +10,10 @@ public class MatchUser
 	@DatabaseField(generatedId = true)
 	private int id;
 
-	@DatabaseField(columnName = "match_id")
+	@DatabaseField(columnName = "match_id", foreign = true)
 	private Match match;
 
-	@DatabaseField(columnName = "user_id")
+	@DatabaseField(columnName = "user_id", foreign = true)
 	private User user;
 
 	@DatabaseField

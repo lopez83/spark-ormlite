@@ -15,10 +15,10 @@ public class RankingHistory
 	@DatabaseField
 	private int ranking;
 
-	@DatabaseField(columnName = "user_id")
+	@DatabaseField(columnName = "user_id", foreign = true)
 	private User user;
 
-	@DatabaseField(columnName = "match_id")
+	@DatabaseField(columnName = "match_id", foreign = true)
 	private Match match;
 
 	@DatabaseField(columnName = "updated_at")
