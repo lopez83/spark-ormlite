@@ -27,11 +27,10 @@ public class EmailController
             String challenged = req.params(":challenged");
             User challengedUser = userService.getUser(challenged);
 
-            String challengerEmail = "You challenged " + challengedUser.getName() + "!";
-            String challengedEmail = challengerUser.getName() + "challenged you!";
+            String emailMessage = challengerUser.getName() + " challenged " + challengedUser.getName() + "!";
 
-            EmailService.sendEmail("Ping Pong Challenge!", challengerUser.getEmail(), challengerEmail);
-            EmailService.sendEmail("Ping Pong Challenge!", challengedUser.getEmail(), challengedEmail);
+            EmailService.sendEmail("Ping Pong Challenge!", challengerUser.getEmail(), emailMessage);
+            EmailService.sendEmail("Ping Pong Challenge!", challengedUser.getEmail(), emailMessage);
 
             return "Email Sent!";
         });

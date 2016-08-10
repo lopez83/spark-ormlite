@@ -118,8 +118,7 @@ public class UserService
 
         User user = null;
         if (email != null) {
-            List<User> results = userDao.queryBuilder().where().eq("email", email).query();
-
+            List<User> results = userDao.queryForEq("email", email);
             user = results.get(0);
         }
         return user;
