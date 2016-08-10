@@ -1,9 +1,12 @@
 package com.accesso.challengeladder.controller;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
+import static spark.Spark.put;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.accesso.challengeladder.model.Match;
@@ -19,6 +22,32 @@ public class MatchController
 		get("/matches", (req, res) -> {
 			List<Match> rankings = matchService.getAllMatches();
 			return JsonUtil.toJson(rankings);
+		});
+		
+		// get information about a match
+		get("/matches/:id", (req, res) -> {
+			return JsonUtil.toJson(matchService.getMatch(req.params(":id")));
+		});
+		
+		// get all users in a match
+		get("/matches/:id/users", (req, res) -> {
+			return JsonUtil.toJson(matchService.getMatchUsers(req.params(":id")));
+		});
+		
+		post("/matches", (req, res) -> {
+			
+			return null;
+		});
+		
+		put("/matches/:id", (req, res) -> {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			return JsonUtil.toJson(matchService.updateMatch(
+					req.queryParams("matchId"),
+					req.queryParams("victorId"),
+					sdf.parse(req.queryParams("matchTimestamp")),
+					req.queryParams("status"),
+					sdf.parse(req.queryParams("creationTimestamp")),
+					req.queryParams("creatorId")));
 		});
 	}
 }
