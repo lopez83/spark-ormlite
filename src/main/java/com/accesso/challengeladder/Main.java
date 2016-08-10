@@ -22,7 +22,7 @@ public class Main
 
 		logger.debug("Starting...");
 
-		//CorsFilters.apply();
+		CorsFilters.apply();
 
 		new UserController();
 
