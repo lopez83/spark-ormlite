@@ -28,6 +28,10 @@ public class User
 	@DatabaseField(columnName = "active_flag")
 	private String activeFlag;
 
+    private int numWins;
+
+    private int numLosses;
+
 	public User()
 	{
 		// ORMLite needs a no-arg constructor
@@ -102,4 +106,24 @@ public class User
 	{
 		this.activeFlag = activeFlag;
 	}
+
+    public int getNumLosses()
+    {
+        return numLosses;
+    }
+
+    public void setNumLosses(int numLosses)
+    {
+        this.numLosses = numLosses;
+    }
+
+    public int getNumWins()
+    {
+        return numWins;
+    }
+
+    public void setNumWins(int numWins)
+    {
+        this.numWins = numWins;
+    }
 }
