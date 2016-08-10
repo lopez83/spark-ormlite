@@ -12,9 +12,6 @@ public class Match
 	@DatabaseField(generatedId = true)
 	private int id;
 
-	@DatabaseField(columnName = "user_id", foreign = true)
-	private User user;
-
 	@DatabaseField(columnName = "match_timestamp")
 	private Date matchTimestamp;
 
@@ -60,11 +57,6 @@ public class Match
 		this.creationTimestamp = creationTimestamp;
 	}
 
-	public User getUser()
-	{
-		return user;
-	}
-
 	public User getVictorUser()
 	{
 		return victorUser;
@@ -78,11 +70,6 @@ public class Match
 	public User getCreatorUser()
 	{
 		return creatorUser;
-	}
-
-	public void setUser(User user)
-	{
-		this.user = user;
 	}
 
 	public void setVictorUser(User victorUser)

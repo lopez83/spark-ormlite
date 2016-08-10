@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+import com.accesso.challengeladder.controller.MatchController;
 import com.accesso.challengeladder.controller.RankingController;
 import com.accesso.challengeladder.controller.RankingHistoryController;
 import com.accesso.challengeladder.controller.UserController;
@@ -27,6 +28,8 @@ public class Main
 		new RankingController();
 
 		new RankingHistoryController();
+
+		new MatchController();
 
 	}
 }
