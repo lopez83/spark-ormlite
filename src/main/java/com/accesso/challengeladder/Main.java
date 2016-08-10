@@ -3,6 +3,7 @@ package com.accesso.challengeladder;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import com.accesso.challengeladder.controller.EmailController;
 import org.apache.log4j.Logger;
 
 import com.accesso.challengeladder.controller.MatchController;
@@ -30,6 +31,8 @@ public class Main
 		new RankingHistoryController();
 
 		new MatchController();
+
+		new EmailController();
 
 	}
 }
