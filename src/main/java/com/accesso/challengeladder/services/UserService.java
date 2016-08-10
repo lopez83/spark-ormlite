@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.accesso.challengeladder.model.Match;
+import com.accesso.challengeladder.model.MatchUser;
+import com.j256.ormlite.stmt.QueryBuilder;
 import org.apache.log4j.Logger;
 
 import com.accesso.challengeladder.model.User;
@@ -23,6 +26,8 @@ public class UserService
 	private ConnectionSource connectionSource;
 	private Dao<User, String> userDao;
     private static String salt;
+    private Dao<Match, String> matchDao;
+    private Dao<MatchUser, String> matchUserDao;
 
 	public UserService() throws SQLException, IOException
 	{
@@ -33,7 +38,8 @@ public class UserService
 		this.connectionSource = connectionSource;
 		userDao = DaoManager.createDao(this.connectionSource, User.class);
 
-
+        matchDao = DaoManager.createDao(this.connectionSource, Match.class);
+        matchUserDao = DaoManager.createDao(this.connectionSource, MatchUser.class);
 	}
 
 	public boolean addUser(User newUser)
@@ -107,6 +113,9 @@ public class UserService
         if (userId != null) {
             user = userDao.queryForId(userId);
         }
+
+        getMatchRecord(user);
+
         return user;
     }
 
@@ -131,6 +140,7 @@ public class UserService
             user.setPassword(null);
             user.setSalt(null);
         }
+
         return user;
     }
 
@@ -164,4 +174,36 @@ public class UserService
         }
 		return userList;
 	}
+
+    /**
+     * Queries for the match_user entries and calculates the number of wins and losses and stores them in the User object
+     *
+     * @param user
+     * @throws SQLException
+     */
+    public void getMatchRecord(User user) throws SQLException
+    {
+        QueryBuilder<MatchUser, String> matchUserQB = matchUserDao.queryBuilder();
+        matchUserQB.where().eq("user_id", user);
+
+        int numWins = 0;
+        int numLosses = 0;
+
+        List<MatchUser> matchUserList = matchUserQB.query();
+        for (MatchUser mu : matchUserList)
+        {
+            matchDao.refresh(mu.getMatch());
+            if (mu.getMatch().getVictorUser().getId() != user.getId())
+            {
+                numLosses++;
+            }
+            else
+            {
+                numWins++;
+            }
+        }
+
+        user.setNumWins(numWins);
+        user.setNumLosses(numLosses);
+    }
 }
