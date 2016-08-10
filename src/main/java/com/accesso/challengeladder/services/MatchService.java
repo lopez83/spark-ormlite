@@ -118,6 +118,8 @@ public class MatchService
 			if(creationTimestamp != null) match.setCreationTimestamp(creationTimestamp);
 			
 			if(creatorId != null) match.setCreatorUser(userDao.queryForId(creatorId));
+			
+			matchDao.update(match);
 		}
 		catch(SQLException sqle) {
 			logger.error(sqle);
