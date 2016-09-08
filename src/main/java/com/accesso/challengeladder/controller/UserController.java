@@ -54,28 +54,5 @@ public class UserController
                 }
             });
 
-        // this cant be right......
-        post("/users/:email/:password/:login", (req, res) -> {
-            if (req.params(":login").equals("1"))
-            {
-                String userId = userService.validateUser(req.params(":email"), req.params(":password"));
-                User returnUser = userService.getMaskedUser(userId);
-
-                if (returnUser == null)
-                {
-                    res.status(HttpStatus.NOT_FOUND_404);
-                    return "User login failed";
-                }
-
-                User user = userService.getMaskedUser(userId);
-
-                return JsonUtil.toJson(user);
-
-            }
-
-            res.status(HttpStatus.NOT_FOUND_404);
-            return "User login failed";
-        });
-
     }
 }

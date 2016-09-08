@@ -88,24 +88,6 @@ public class UserService
         }
     }
 
-    public User createUser(String username, String email)
-    {
-        User user = new User();
-        try
-        {
-
-            user.setEmail(email);
-            // creates a new user in the DB
-            userDao.create(user);
-        }
-        catch (Exception e)
-        {
-            logger.error("Exception..." + e.getMessage());
-            return null;
-        }
-        return user;
-    }
-
     public User getUser(String userId) throws SQLException
     {
         User user = null;
@@ -142,18 +124,6 @@ public class UserService
             List<User> results = userDao.queryForEq("email", email);
             user = results.get(0);
         }
-        return user;
-    }
-
-    public User getMaskedUser(String userId) throws SQLException
-    {
-        User user = getUser(userId);
-        if (userId != null)
-        {
-            user.setPassword(null);
-            user.setSalt(null);
-        }
-
         return user;
     }
 
