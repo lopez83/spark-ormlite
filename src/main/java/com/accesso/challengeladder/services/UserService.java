@@ -94,9 +94,8 @@ public class UserService
         if (userId != null)
         {
             user = userDao.queryForId(userId);
+            getMatchRecord(user);
         }
-
-        getMatchRecord(user);
 
         return user;
     }

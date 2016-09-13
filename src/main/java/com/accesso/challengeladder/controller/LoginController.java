@@ -19,12 +19,12 @@ public class LoginController
         post("/login", (req, res) -> {
             LoginForm newLoginForm = new Gson().fromJson(req.body(), LoginForm.class);
 
-            String userId = userService.validateUser(newLoginForm.getEmail(), newLoginForm.getPassword());
+            String userId = userService.validateUser(newLoginForm.getUsername(), newLoginForm.getPassword());
             User returnUser = userService.getUser(userId);
 
             if (returnUser == null)
             {
-                res.status(HttpStatus.NOT_FOUND_404);
+                res.status(HttpStatus.UNAUTHORIZED_401);
                 return "User login failed";
             }
 
