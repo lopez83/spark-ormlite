@@ -1,6 +1,6 @@
-package com.accesso.challengeladder.model;
+package com.accesso.challengeladder.requests;
 
-public class LoginForm
+public class LoginRequest
 {
     private String username;
     private String password;

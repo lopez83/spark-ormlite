@@ -1,6 +1,6 @@
 package com.accesso.challengeladder.controller;
 
-import com.accesso.challengeladder.model.LoginForm;
+import com.accesso.challengeladder.requests.LoginRequest;
 import com.accesso.challengeladder.model.User;
 import com.accesso.challengeladder.services.UserService;
 import com.accesso.challengeladder.utils.JsonUtil;
@@ -17,9 +17,9 @@ public class LoginController
     {
         UserService userService = new UserService();
         post("/login", (req, res) -> {
-            LoginForm newLoginForm = new Gson().fromJson(req.body(), LoginForm.class);
+            LoginRequest newLoginRequest = new Gson().fromJson(req.body(), LoginRequest.class);
 
-            String userId = userService.validateUser(newLoginForm.getUsername(), newLoginForm.getPassword());
+            String userId = userService.validateUser(newLoginRequest.getUsername(), newLoginRequest.getPassword());
             User returnUser = userService.getUser(userId);
 
             if (returnUser == null)
