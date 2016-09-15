@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<style>
+h1 { font-size: 150% }
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+<head>
+<title>accesso Ping Pong Ladder</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="rankCtrl">
+
+<h1>accesso Ping Pong Ladder <a href="rules.html">(Rules)</a></h1>
+<table>
+  <tr>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Email</th>
+  </tr>
+  <tr ng-repeat="x in players">
+    <td>{{ $index+1 }}</td>
+    <td>{{ x.user.name }}</td>
+    <td><a href="mailto:{{ x.user.email}}?subject=LadderChallenge">{{ x.user.email}}</a></td>
+  </tr>
+</table>
+<br>
+<a href="mailto:sean.sharp@accesso.com;michael.garcia@accesso.com?subject=LadderMatch">Report Match Result</a>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('rankCtrl', function($scope, $http) {
+    $http.get("http://192.168.2.46:4567/ranking")
+    .then(function (response) {$scope.players = response.data;});
+});
+</script>
+
+</body>
+</html>
