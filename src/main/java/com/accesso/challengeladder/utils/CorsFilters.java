@@ -2,14 +2,11 @@ package com.accesso.challengeladder.utils;
 
 import java.util.HashMap;
 
-import spark.Filter;
-import spark.Request;
-import spark.Response;
 import spark.Spark;
 
 public class CorsFilters {
 
-	private static final HashMap<String, String> corsHeaders = new HashMap<String, String>();
+	private static final HashMap<String, String> corsHeaders = new HashMap<>();
 
 	static {
 		corsHeaders.put("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
@@ -20,14 +17,29 @@ public class CorsFilters {
 	}
 
 	public final static void apply() {
-		Filter filter = new Filter() {
-			@Override
-			public void handle(Request request, Response response) throws Exception {
-				corsHeaders.forEach((key, value) -> {
-					response.header(key, value);
-				});
-			}
-		};
-		Spark.after(filter);
-	}
+		Spark.after((request, response) ->
+                corsHeaders.forEach(response::header)
+        );
+
+        Spark.options("/*", (request, response) -> {
+
+            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+            if (accessControlRequestHeaders != null) {
+                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+            }
+
+            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+            if (accessControlRequestMethod != null) {
+                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+            }
+
+            return "OK";
+        });
+
+        //Spark.before((request,response)->{
+        //        response.header("Access-Control-Allow-Origin", "*");
+        //});
+    }
+
+
 }

@@ -44,10 +44,10 @@ public class MatchController
                 (req, res) -> {
                     PostMatchesRequest postMatchesRequest = new Gson().fromJson(req.body(), PostMatchesRequest.class);
                     postMatchesRequest.getCreatorUserId();
-                    postMatchesRequest.getOponentUserId();
+                    postMatchesRequest.getOpponentUserId();
 
                     Match match = matchService.createMatch(postMatchesRequest.getCreatorUserId(),
-                            new ArrayList<Integer>(Arrays.asList(postMatchesRequest.getOponentUserId())));
+                            new ArrayList<>(Arrays.asList(postMatchesRequest.getOpponentUserId())));
 
                     if (match == null)
                     {

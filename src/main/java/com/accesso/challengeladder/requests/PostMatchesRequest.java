@@ -9,12 +9,12 @@ public class PostMatchesRequest
 {
 
     private Integer creatorUserId;
-    private Integer oponentUserId;
+    private Integer opponentUserId;
 
-    public PostMatchesRequest(Integer creatorUserId, Integer oponentUserId)
+    public PostMatchesRequest(Integer creatorUserId, Integer opponentUserId)
     {
         this.creatorUserId = creatorUserId;
-        this.oponentUserId = oponentUserId;
+        this.opponentUserId = opponentUserId;
     }
 
     public Integer getCreatorUserId()
@@ -22,9 +22,9 @@ public class PostMatchesRequest
         return creatorUserId;
     }
 
-    public Integer getOponentUserId()
+    public Integer getOpponentUserId()
     {
-        return oponentUserId;
+        return opponentUserId;
     }
 
     public void setCreatorUserId(Integer creatorUserId)
@@ -32,14 +32,14 @@ public class PostMatchesRequest
         this.creatorUserId = creatorUserId;
     }
 
-    public void setOponentUserId(Integer oponentUserId)
+    public void setOpponentUserId(Integer opponentUserId)
     {
-        this.oponentUserId = oponentUserId;
+        this.opponentUserId = opponentUserId;
     }
 
     @Override
     public String toString()
     {
-        return "PostMatchesRequest [creatorUserId=" + creatorUserId + ", oponentUserId=" + oponentUserId + "]";
+        return "PostMatchesRequest [creatorUserId=" + creatorUserId + ", opponentUserId=" + opponentUserId + "]";
     }
 }
