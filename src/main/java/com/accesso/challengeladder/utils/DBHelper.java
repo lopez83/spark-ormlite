@@ -1,4 +1,4 @@
-package com.lopez83.spark.utils;
+package com.accesso.challengeladder.utils;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -7,13 +7,15 @@ import java.util.Properties;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 
-public class DBHelper {
+public class DBHelper
+{
 
 	private String databaseUrl;
 	private String userDb;
 	private String passDb;
 
-	public DBHelper() throws IOException {
+	public DBHelper() throws IOException
+	{
 
 		Properties prop = new Properties();
 		prop.load(DBHelper.class.getClassLoader().getResourceAsStream("db.properties"));
@@ -23,7 +25,8 @@ public class DBHelper {
 		this.passDb = prop.getProperty("db.password");
 	}
 
-	public ConnectionSource getConnectionSource() throws SQLException {
+	public ConnectionSource getConnectionSource() throws SQLException
+	{
 		ConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl);
 		((JdbcConnectionSource) connectionSource).setUsername(userDb);
 		((JdbcConnectionSource) connectionSource).setPassword(passDb);
